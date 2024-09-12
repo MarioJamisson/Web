@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Criação de Evento</title>
+</head>
+<body class="formulario">
+    <div class="box">
+        <div class="form-box">
+            <h2>Criação de Evento</h2>
+            <form th:object="${evento}" th:action="@{/eventos/formulario}" method="post">
+                
+                <input th:if="${evento != null}" type="hidden" name="_method" value="put">
+                <input type="hidden" name="id" th:value="${evento?.getId}">
+                
+                <div class="input-group">
+                    <label for="nome">Evento:</label>
+                    <input type="text" id="nome" name="nome" th:value="${evento?.getNome()}" placeholder="Digite o nome do evento" required/> 
+                </div>
+                <div class="input-group">
+                    <label for="local">Local:</label>
+                    <input type="text" id="local" name="local" th:value="${evento?.getLocal()}" placeholder="Digite o local do evento" required/>            
+                </div>
+                <div class="input-group">
+                    <label for="agencia">Agência:</label>
+                    <input type="text" id="agencia" name="agencia" th:value="${evento?.getAgencia()}" placeholder="Digite a agência responsável" required/>            
+                </div>
+                <div class="input-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" th:value="${evento?.getData()}" placeholder="Digite a data do evento" required/>            
+                </div>
+                <div class="input-group">
+                    <button type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

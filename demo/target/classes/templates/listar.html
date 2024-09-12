@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Lista de Eventos</title>
+</head>
+
+<body>
+    <h1>Lista de Eventos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Local</th>
+                <th>Agência</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="evento : ${eventos}">
+                <td th:text="${evento.getId()}"></td>
+                <td th:text="${evento.getNome()}"></td>
+                <td th:text="${evento.getData()}"></td>
+                <td th:text="${evento.getLocal()}"></td>
+                <td th:text="${evento.getAgencia()}"></td>
+                <td>
+                    <form action="\eventos" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="id" th:value="${evento.getId}">
+                        <button class="deletebutton" type="submit">
+                            <i class="bx bxs-trash"></i>
+                        </button>
+                    </form> 
+                    <a th:href="@{/eventos/formulario?id={id}(id=${evento.getId()})}">
+                        <i class='bx bxs-edit'></i>
+                    </a>
+                </tr>
+        </tbody>
+    </table>
+    <button class="action">
+        <a href="/eventos/formulario">Criar Novo Evento</a>
+    </button>
+</body>
+</html>
